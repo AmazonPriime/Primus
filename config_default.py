@@ -1,4 +1,4 @@
-from functions import *
+import functions as fn
 
 key = "INSERT KEY HERE"
 
@@ -13,14 +13,18 @@ calc_functions = {
     '/' : lambda l: l[0] / l[1],
 }
 
-calc_list = list(config.calc_functions.keys())
+calc_list = list(calc_functions.keys())
 
+# 'fn' - function associated with command
+# 'name' - name of the command
+# 'text' - the text that appears on the help page
+# 'usage' - describes the arguments taken (empty string if no arguments required)
 commands = {
-    'help' : {'fn' : help, 'name' : 'help', 'text' : 'Help command to explain the commands of the bot.', 'usage' : 'help'},
-    'clear' : {'fn' : clear, 'name' : 'clear', 'text' : '[Admin] Used to clear the chat of the channel command is executed in.', 'usage' : 'clear'},
-    'calc' : {'fn' : calc, 'name' : 'calc', 'text' : 'Used to calculate the result of two numbers.', 'usage' : 'calc <num> {} <num>'.format(calc_list)},
-    'textemoji' : {'fn' : textemoji, 'name' : 'textemoji', 'text' : 'Used to convert text to emojis. Supports [A-Z] [0-9]', 'usage' : 'textemoji <text>'},
-    'history' : {'fn' : history, 'name' : 'history', 'text' : '[Admin] Used to get the message history of the channel.', 'usage' : 'history <num>'},
+    'help' : {'fn' : fn.help, 'name' : 'help', 'text' : 'Help command to explain the commands of the bot.', 'usage' : ''},
+    'clear' : {'fn' : fn.clear, 'name' : 'clear', 'text' : '[Admin] Used to clear the chat of the channel command is executed in.', 'usage' : ''},
+    'calc' : {'fn' : fn.calc, 'name' : 'calc', 'text' : 'Used to calculate the result of two numbers.', 'usage' : '<num> {} <num>'.format(calc_list)},
+    'textemoji' : {'fn' : fn.textemoji, 'name' : 'textemoji', 'text' : 'Used to convert text to emojis. Supports [A-Z] [0-9]', 'usage' : '<text>'},
+    'history' : {'fn' : fn.history, 'name' : 'history', 'text' : '[Admin] Used to get the message history of the channel.', 'usage' : '<num>'},
 }
 
 symbols = {

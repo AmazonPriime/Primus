@@ -4,7 +4,7 @@ import discord, config
 async def help(message, *argv):
     help_message = discord.Embed(title = "Commands Help", colour = 0x00fdff)
     for cmd in config.commands:
-        value = "{}\n`{}{}`".format(config.commands[cmd]['text'], config.prefix, config.commands[cmd]['usage'])
+        value = "{}\n`{}{} {}`".format(config.commands[cmd]['text'], config.prefix, config.commands[cmd]['name'], config.commands[cmd]['usage'])
         help_message.add_field(name = config.commands[cmd]['name'], value = value, inline = False)
     await message.channel.send(embed = help_message)
 
@@ -39,6 +39,7 @@ async def textemoji(message, *argv):
                 msg += "  "
         if len(msg) > 0:
             await message.channel.send(msg)
+            await message.delete()
         else:
             await message.channel.send("Cannot convert an empty message. Make sure to use valid symbols. [A-Z] [0-9]")
     except:
