@@ -1,6 +1,9 @@
 import discord, config
 
-# command to provide information about the commands
+'''
+# Help Command:
+    When called it will show all the commands the bot can handle and has a description of each, what it displays depends on the config file.
+'''
 async def help(message, *argv):
     help_message = discord.Embed(title = "Commands Help", colour = 0x00fdff)
     for cmd in config.commands:
@@ -8,7 +11,10 @@ async def help(message, *argv):
         help_message.add_field(name = config.commands[cmd]['name'], value = value, inline = False)
     await message.channel.send(embed = help_message)
 
-# command clears the messages from the channel
+'''
+# Clear Command:
+    Admin command which deletes all the messages from the channel it is call in.
+'''
 async def clear(message, *argv):
     if message.author.guild_permissions.administrator:
         await message.channel.purge()
@@ -16,7 +22,18 @@ async def clear(message, *argv):
     else:
         await message.channel.send("You don't seem to be an administrator.")
 
-# command to calculate the result of two numbers
+'''
+# Calculate Command:
+    Calculates the result of two numbers, can handle all the operators specified in the config - outcome depends on the lambda function provided.
+
+    Args:
+        argv[0][0] (number 1): int
+        argv[0][1] (operand): string
+        argv[0][2] (number 2): int
+
+    Returns:
+        The result of the two numbers based on the operator provided.
+'''
 async def calc(message, *argv):
     try:
         operands, operator = [float(argv[0][0]), float(argv[0][2])], argv[0][1]
@@ -28,7 +45,13 @@ async def calc(message, *argv):
     except:
         await message.channel.send("Make sure your arguments are correct.\nCommand usage: **{}calc <num> {} <num>**".format(config.prefix, list(config.calc_functions.keys())))
 
-# command to convert text to discord emoji symbols
+'''
+# TextEmoji Command:
+    Converts the given string into a message using emojis associated with each character - characters can be defined in the config file.
+
+    Returns:
+        The string using just emojis.
+'''
 async def textemoji(message, *argv):
     try:
         msg = ""
@@ -45,7 +68,16 @@ async def textemoji(message, *argv):
     except:
         print("Something went wrong.")
 
-# command to get the history of the channel and store in file <guild>.<channel id>.txt
+'''
+# History Command:
+    Sends the message history of the channel to the user who issued the command. - num argument limits the amount of messages to be sent to user
+
+    Args:
+        argv[0][0] (number of messages): int
+
+    Returns:
+        A private message to the user containing all the messages in the channel.
+'''
 async def history(message, *argv):
     if message.author.guild_permissions.administrator:
         try:
