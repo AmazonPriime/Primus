@@ -1,11 +1,11 @@
 import functions as fn
 
+# Bot information
 key = "INSERT KEY HERE"
-
 prefix = "INSERT COMMAND PREFIX HERE"
-
 status = "INSERT BOT STATUS HERE"
 
+# Functions for the 'Calculate' function
 calc_functions = {
     '+' : lambda l: l[0] + l[1],
     '-' : lambda l: l[0] - l[1],
@@ -20,13 +20,32 @@ calc_list = list(calc_functions.keys())
 # 'text' - the text that appears on the help page
 # 'usage' - describes the arguments taken (empty string if no arguments required)
 commands = {
-    'help' : {'fn' : fn.help, 'name' : 'help', 'text' : 'Help command to explain the commands of the bot.', 'usage' : ''},
-    'clear' : {'fn' : fn.clear, 'name' : 'clear', 'text' : '[Admin] Used to clear the chat of the channel command is executed in.', 'usage' : ''},
-    'calc' : {'fn' : fn.calc, 'name' : 'calc', 'text' : 'Used to calculate the result of two numbers.', 'usage' : '<num> {} <num>'.format(calc_list)},
-    'textemoji' : {'fn' : fn.textemoji, 'name' : 'textemoji', 'text' : 'Used to convert text to emojis. Supports [A-Z] [0-9]', 'usage' : '<text>'},
-    'history' : {'fn' : fn.history, 'name' : 'history', 'text' : '[Admin] Used to get the message history of the channel.', 'usage' : '<num>'},
+    'help' : {
+        'fn' : fn.help,
+        'name' : 'help',
+        'aliases' : [],
+        'text' : 'Help command to explain the commands of the bot.',
+        'usage' : ''
+    },
+    'clear' : {
+        'fn' : fn.clear,
+        'name' : 'clear',
+        'aliases' : [],
+        'text' : '[Admin] Used to clear the chat of the channel command is executed in.', 'usage' : ''
+    },
+    'calc' : {
+        'fn' : fn.calc,
+        'name' : 'calc',
+        'aliases' : [],
+        'text' : 'Used to calculate the result of two numbers.', 'usage' : '<num> {} <num>'.format(calc_list)
+    },
+    'textemoji' : {'fn' : fn.textemoji, 'name' : 'textemoji', 'aliases' : [],
+        'text' : 'Used to convert text to emojis. Supports [A-Z] [0-9]', 'usage' : '<text>'},
+    'history' : {'fn' : fn.history, 'name' : 'history', 'aliases' : [],
+        'text' : '[Admin] Used to get the message history of the channel.', 'usage' : '<num>'},
 }
 
+# The symbols that are used for the 'TextEmoji' command
 symbols = {
     '0' : ':zero:', '1': ':one:', '2': ':two:', '3': ':three:', '4': ':four:',
     '5': ':five:', '6': ':six:', '7': ':seven:', '8': ':eight:', '9': ':nine:',
